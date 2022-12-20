@@ -8,7 +8,7 @@ export function Home() {
 
   return (
     <Container>
-      Jonas' Barber
+      Barber's
       <Button onClick={() => navigate("/example")}>Clique em mim!</Button>
     </Container>
   );
