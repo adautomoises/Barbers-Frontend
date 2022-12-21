@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container } from "./styles";
+import { Container, Button, Title } from "./styles";
 
 interface Props {
   type?: "button" | "submit" | "reset" | undefined;
@@ -11,8 +11,10 @@ interface Props {
 
 export function ButtonForm({ type, title, color, onClick }: Props) {
   return (
-    <Container type={type} color={color} onClick={onClick}>
-      {title}
+    <Container color={color}>
+      <Button type={type} onClick={onClick}>
+        <Title color={color}>{title}</Title>
+      </Button>
     </Container>
   );
 }
