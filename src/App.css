@@ -33,6 +33,7 @@ body {
   font-family: "Libre Baskerville", serif;
   font-size: 5rem;
   font-weight: normal;
+  text-transform: uppercase;
   color: var(--primary);
   background: var(--background);
 }
