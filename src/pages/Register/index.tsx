@@ -3,8 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import { Input } from "../../components/Input";
-import { ButtonForm } from "../../components/ButtonForm";
+// import { Input } from "../../components/Input";
+// import { ButtonForm } from "../../components/ButtonForm";
 
 import {
   Container,
@@ -17,7 +17,7 @@ import {
 } from "./styles";
 import api from "../../services/api";
 
-interface Form {
+interface FormProps {
   email: string;
   userName: string;
   fullName: string;
@@ -63,13 +63,13 @@ export function Register() {
   const {
     register,
     handleSubmit,
-    watch,
+    // watch,
     formState: { errors },
-  } = useForm<Form>({
+  } = useForm<FormProps>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: Form) => {
+  const onSubmit = (data: FormProps) => {
     console.log(data);
 
     let request = {
