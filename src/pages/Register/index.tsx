@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-// import { Input } from "../../components/Input";
-// import { ButtonForm } from "../../components/ButtonForm";
+import api from "../../services/api";
+import { Input } from "../../components/Input";
+import { ButtonForm } from "../../components/ButtonForm";
 
 import {
   Container,
@@ -15,7 +16,6 @@ import {
   Title,
   SubTitle,
 } from "./styles";
-import api from "../../services/api";
 
 interface FormProps {
   email: string;
@@ -26,16 +26,19 @@ interface FormProps {
 }
 
 const schema = yup.object({
-  email: yup.string().email().required("Digite um e-mail válido, Por favor!"),
+  email: yup
+    .string()
+    .email("Digite um e-mail válido, Por favor!")
+    .required("E-mail é obrigatório"),
   userName: yup.string().required("Digite seu Nome de Usuário, Por favor!"),
   fullName: yup.string().required("Digite seu Nome Completo, Por favor!"),
   password: yup
     .string()
-    .required("Password Required")
-    .min(8, "Password too short")
+    .required("Senha é obrigatório")
+    .min(8, "A senha é muito curta")
     .test(
       "isValidPass",
-      "Passowrd must be 8 char (One UpperCase & One Symbol)",
+      "Senha deve ter pelo menos 8 caracteres, uma letra maíuscula e um símbolo",
       (value: any, context: any) => {
         const hasUpperCase = /[A-Z]/.test(value);
         const hasNumber = /[0-9]/.test(value);
@@ -55,8 +58,8 @@ const schema = yup.object({
     ),
   passwordConfirmation: yup
     .string()
-    .required("Confirm Password Required")
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
+    .required("Confirmação de senha é obrigatório")
+    .oneOf([yup.ref("password"), null], "Senhas não podem ser diferentes!"),
 });
 
 export function Register() {
@@ -92,6 +95,20 @@ export function Register() {
       });
   };
 
+  useEffect(() => {
+    api
+      .get("/users")
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        console.log("getado!");
+      });
+  }, []);
+
   return (
     <Container>
       <Form>
@@ -100,72 +117,54 @@ export function Register() {
           <SubTitle>Bem-vindo! Por favor, informe sua conta.</SubTitle>
         </Header>
         <Body onSubmit={handleSubmit(onSubmit)}>
-          <>
-            <label>Nome Completo*</label>
-            <input
-              // title={"Nome Completo"}
-              type="text"
-              {...register("fullName")}
-              name="fullName"
-              placeholder="Nome Completo"
-            />
-            <p>{errors.fullName?.message}</p>
-          </>
-          <>
-            <label>Nome de Usuário*</label>
-            <input
-              title={"Nome de Usuário"}
-              type="text"
-              {...register("userName")}
-              name="userName"
-              placeholder="Nome de Usuário"
-            />
-            <p>{errors.userName?.message}</p>
-          </>
-          <>
-            <label>E-mail*</label>
-            <input
-              title={"E-mail"}
-              type="email"
-              {...register("email")}
-              name="email"
-              placeholder="E-mail"
-            />
-            <p>{errors.email?.message}</p>
-          </>
-          <>
-            <label>Senha*</label>
-            <input
-              title={"Senha"}
-              type="password"
-              {...register("password")}
-              name="password"
-              placeholder="Senha"
-            />
-            <p>{errors.password?.message}</p>
-          </>
-          <>
-            <label>Confirmar Senha*</label>
-            <input
-              title={"Confirmar Senha"}
-              type="password"
-              {...register("passwordConfirmation")}
-              name="passwordConfirmation"
-              placeholder="Confirmar Senha"
-            />
-            <p>{errors.passwordConfirmation?.message}</p>
-          </>
-          <button type="submit" onClick={() => console.log("clicado!")}>
-            Cadastrar
-          </button>
+          <Input
+            title={"Nome Completo"}
+            type="text"
+            name="fullName"
+            placeholder="Nome Completo"
+            register={{ ...register("fullName") }}
+            error={errors.fullName?.message}
+          />
+          <Input
+            title={"Nome de Usuário"}
+            type="text"
+            name="userName"
+            placeholder="Nome de Usuário"
+            register={{ ...register("userName") }}
+            error={errors.userName?.message}
+          />
+          <Input
+            title={"E-mail"}
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            register={{ ...register("email") }}
+            error={errors.email?.message}
+          />
+          <Input
+            title={"Senha"}
+            type="password"
+            name="password"
+            placeholder="Senha"
+            register={{ ...register("password") }}
+            error={errors.password?.message}
+          />
+          <Input
+            title={"Confirmar Senha"}
+            type="password"
+            register={{ ...register("passwordConfirmation") }}
+            name="passwordConfirmation"
+            placeholder="Confirmar Senha"
+            error={errors.passwordConfirmation?.message}
+          />
+          <ButtonForm
+            type="submit"
+            title="Cadastrar"
+            color="green"
+            onClick={() => console.log("clicado!")}
+          />
         </Body>
         <Footer>
-          {/* <ButtonForm
-          type="submit"
-          title="Cadastrar"
-          color="green"
-          onClick={() => onSubmit}
-        /> */}
           <SubTitle>Já possui uma conta? Entrar</SubTitle>
         </Footer>
       </Form>

@@ -28,10 +28,18 @@ export const Header = styled.div`
 `;
 
 export const Title = styled.label`
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 24px;
   margin-bottom: 0.5rem;
 `;
 
-export const SubTitle = styled.label``;
+export const SubTitle = styled.label`
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 24px;
+`;
 
 export const Body = styled.form`
   display: flex;
@@ -39,10 +47,11 @@ export const Body = styled.form`
 
   width: 404px;
 
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `;
 
 export const Footer = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
 `;
