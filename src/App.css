@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700;900&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -29,7 +29,8 @@
 }
 
 body {
-  font-family: "Bebas Neue", cursive;
+  font-family: "Montserrat", sans-serif;
+  font-family: "Libre Baskerville", serif;
   font-size: 5rem;
   font-weight: normal;
   color: var(--primary);

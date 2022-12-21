@@ -9,7 +9,7 @@ export function Home() {
   return (
     <Container>
       Barber's
-      <Button onClick={() => navigate("/example")}>Clique em mim!</Button>
+      <Button onClick={() => navigate("/cadastro")}>Clique em mim!</Button>
     </Container>
   );
 }

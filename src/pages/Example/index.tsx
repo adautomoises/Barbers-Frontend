@@ -9,7 +9,7 @@ export function Example() {
 
   React.useEffect(() => {
     api
-      .get("/barbers")
+      .get("/users")
       .then((response) => console.log(response.data))
       .catch((errors: any) => {
         console.log(errors);
