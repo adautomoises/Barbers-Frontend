@@ -14,6 +14,20 @@ export function Home() {
 
   const data = ["Parceiros", "Serviços", "Sobre"];
 
+  const handleUsers = () => {
+    api
+      .get("/users")
+      .then((response) => {
+        console.log("getado!");
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        console.log("logado!");
+      });
+  };
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
@@ -24,24 +38,12 @@ export function Home() {
     }
   }, []);
 
-  useEffect(() => {
-    api
-      .get("/users")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
-      .finally(() => {
-        console.log("getado!");
-      });
-  }, []);
-
   return (
     <Container>
       <Header Items={data} Actions={actions} />
-      <Main></Main>
+      <Main>
+        <button onClick={handleUsers}>Clique em mim para dar o get!!!</button>
+      </Main>
       <Footer />
     </Container>
   );
