@@ -23,7 +23,6 @@ export const InputField = styled.input`
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   font-weight: normal;
-  text-transform: uppercase;
 
   padding: 10px 14px;
   border-radius: 4px;

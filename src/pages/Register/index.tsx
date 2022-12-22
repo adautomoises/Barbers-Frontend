@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 import api from "../../services/api";
 import { Input } from "../../components/Input";
@@ -63,6 +63,8 @@ const schema = yup.object({
 });
 
 export function Register() {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -83,7 +85,7 @@ export function Register() {
     };
 
     api
-      .post("/users/register", request)
+      .post("/users", request)
       .then((response) => {
         console.log(response.data);
       })
@@ -95,26 +97,12 @@ export function Register() {
       });
   };
 
-  useEffect(() => {
-    api
-      .get("/users")
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      })
-      .finally(() => {
-        console.log("getado!");
-      });
-  }, []);
-
   return (
     <Container>
       <Form>
         <Header>
           <Title>Bem-vindo</Title>
-          <SubTitle>Bem-vindo! Por favor, informe sua conta.</SubTitle>
+          <SubTitle>Bem-vindo! Por favor, informe seus dados.</SubTitle>
         </Header>
         <Body onSubmit={handleSubmit(onSubmit)}>
           <Input
@@ -165,7 +153,10 @@ export function Register() {
           />
         </Body>
         <Footer>
-          <SubTitle>Já possui uma conta? Entrar</SubTitle>
+          <SubTitle>
+            Já possui uma conta?{" "}
+            <button onClick={() => navigate("/entrar")}>Entrar</button>
+          </SubTitle>
         </Footer>
       </Form>
     </Container>
