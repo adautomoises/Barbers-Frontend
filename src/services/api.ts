@@ -32,7 +32,7 @@ api.interceptors.response.use(
   async (error) => {
     const error401 = error.response?.status;
 
-    if (error401 === 401 || error401 === 403) {
+    if (error401 === 401) {
       localStorage.removeItem("user");
 
       alert("Sessão Expirada! Por favor, faça login novamente.");
