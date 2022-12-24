@@ -10,6 +10,7 @@ import {
   Login,
   SignIn,
   User,
+  Logout,
 } from "./styles";
 
 interface Props {
@@ -27,10 +28,10 @@ export function Header({ Items, Actions }: Props) {
 
   return (
     <Container>
-      <Logo style={{ width: "25%" }} />
+      <Logo style={{ width: "25%" }} fill={"white"} />
       <MenuItems>
         {Items.map((item, index) => (
-          <div key={index}>{item}</div>
+          <button key={index}>{item}</button>
         ))}
       </MenuItems>
       {Actions === "Login" ? (
@@ -40,8 +41,8 @@ export function Header({ Items, Actions }: Props) {
         </LoginSignIn>
       ) : (
         <LoginSignIn>
-          <User>Nome do usuário, Logado!</User>
-          <button onClick={handleLogout}>Sair</button>
+          <User>Nome do usuário</User>
+          <Logout onClick={handleLogout}>Sair</Logout>
         </LoginSignIn>
       )}
     </Container>

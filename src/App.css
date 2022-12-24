@@ -25,14 +25,30 @@
   --primary-light: #fbe7c9;
 
   --secondary: #12131b;
+  --secondary50: #12131b50;
   --secondary-light: #3d3e46;
 }
 
-body {
+body,
+button {
   font-family: "Montserrat", sans-serif;
   font-family: "Libre Baskerville", serif;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: normal;
-  color: var(--primary);
+  color: var(--surface);
   background: var(--background);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  height: 44px;
+  padding: 10px;
+  transition: border-color 0.5s, background-color 0.5s, color 0.5s;
+}
+button:hover {
+  background-color: #fff;
+  border-color: transparent;
+  color: #444;
 }
