@@ -15,6 +15,7 @@ import {
   Footer,
   Title,
   SubTitle,
+  Button,
 } from "./styles";
 
 interface FormProps {
@@ -39,7 +40,7 @@ const schema = yup.object({
     .test(
       "isValidPass",
       "Senha deve ter pelo menos 8 caracteres, uma letra maíuscula e um símbolo",
-      (value: any, context: any) => {
+      (value: any) => {
         const hasUpperCase = /[A-Z]/.test(value);
         const hasNumber = /[0-9]/.test(value);
         const hasLowerCase = /[a-z]/.test(value);
@@ -153,10 +154,8 @@ export function Register() {
           />
         </Body>
         <Footer>
-          <SubTitle>
-            Já possui uma conta?{" "}
-            <button onClick={() => navigate("/entrar")}>Entrar</button>
-          </SubTitle>
+          <SubTitle>Já possui uma conta? </SubTitle>
+          <Button onClick={() => navigate("/entrar")}>Entrar</Button>
         </Footer>
       </Form>
     </Container>

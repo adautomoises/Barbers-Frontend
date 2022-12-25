@@ -21,7 +21,7 @@ export function Input({
 }: Props) {
   return (
     <Container>
-      <Title>{title}*</Title>
+      <Title>{title}</Title>
       <InputField
         type={type}
         {...register}

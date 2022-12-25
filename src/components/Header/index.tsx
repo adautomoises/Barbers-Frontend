@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { ReactComponent as Logo } from "../../assets/logo.svg";
+import api from "../../services/api";
 
 import {
   Container,
@@ -19,8 +20,16 @@ interface Props {
   Actions: string;
 }
 
+interface UserProps {
+  email: string;
+  fullName: string;
+  id: string;
+  userName: string;
+}
+
 export function Header({ Items, Actions }: Props) {
   const navigate = useNavigate();
+  const [user, setUser] = useState<UserProps>();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -30,6 +39,18 @@ export function Header({ Items, Actions }: Props) {
   const handleNavigate = (name: string) => {
     navigate(`/${name}`);
   };
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("user");
+    api
+      .get(`/users/getUsersById`, { params: { uuid: loggedInUser } })
+      .then((response) => {
+        setUser(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   return (
     <Container>
@@ -48,7 +69,7 @@ export function Header({ Items, Actions }: Props) {
         </LoginSignIn>
       ) : (
         <LoginSignIn>
-          <User>Nome do usuário</User>
+          <User>{user?.userName}</User>
           <Logout onClick={handleLogout}>Sair</Logout>
         </LoginSignIn>
       )}

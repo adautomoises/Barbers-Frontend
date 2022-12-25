@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useRef } from "react";
+import { RefObject, useRef, useState } from "react";
 
 import {
   Container,
@@ -8,7 +8,6 @@ import {
   ScrollUp,
   ScrollDown,
 } from "./styles";
-import imagem from "../../assets/carousel.jpeg";
 
 type Props = {
   images: {
@@ -20,7 +19,7 @@ type Props = {
 };
 
 export function Carousel({ images }: Props) {
-  const [data, setData] = React.useState<Props>();
+  const [data, setData] = useState<Props>();
   const carousel: RefObject<HTMLDivElement> = useRef(null);
 
   const handleCarouselNext = (e: any) => {

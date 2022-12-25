@@ -32,6 +32,7 @@ export const Title = styled.label`
   font-weight: bold;
   line-height: 24px;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
 `;
 
 export const SubTitle = styled.label`
@@ -39,6 +40,7 @@ export const SubTitle = styled.label`
   font-size: 12px;
   font-weight: normal;
   line-height: 24px;
+  text-transform: uppercase;
 `;
 
 export const Body = styled.form`
@@ -53,5 +55,59 @@ export const Body = styled.form`
 export const Footer = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+`;
+
+export const Button = styled.button`
+  color: var(--primary);
+`;
+
+export const LoginSocial = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   flex-direction: column;
+
+  gap: 12px;
+  margin: 16px 0;
+`;
+
+export const LoginWithGoogle = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  color: var(--black100);
+
+  border: 1px solid var(--black100);
+  border-radius: 8px;
+`;
+
+export const LoginWithFace = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  color: var(--black100);
+
+  border: 1px solid var(--black100);
+  border-radius: 8px;
+`;
+
+export const LoginWithApple = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  color: var(--black100);
+
+  border: 1px solid var(--black100);
+  border-radius: 8px;
 `;

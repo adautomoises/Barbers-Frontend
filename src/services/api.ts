@@ -2,10 +2,10 @@ import Axios from "axios";
 
 const defaultInterceptor = {
   response: async (config: any) => {
-    const token = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
 
     if (token) {
-      config.headers.Authorization = `Bearer ${localStorage.getItem("user")}`;
+      config.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
     }
 
     return config;
@@ -33,6 +33,7 @@ api.interceptors.response.use(
     const error401 = error.response?.status;
 
     if (error401 === 401) {
+      localStorage.removeItem("token");
       localStorage.removeItem("user");
 
       alert("Sessão Expirada! Por favor, faça login novamente.");

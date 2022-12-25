@@ -10,19 +10,20 @@ export const Container = styled.main<Props>`
   display: flex;
   justify-content: center;
 
-  padding: 10px 14px;
-  border-radius: 4px;
+  border-radius: 8px;
 
   background-color: ${({ theme, color }) =>
     color === "green" ? theme.colors.Confirm : theme.colors.Error};
+
+  :hover {
+    background-color: green;
+  }
 `;
 
-export const Button = styled.button`
-  background: none;
-  border: none;
-`;
+export const Button = styled.button<Props>`
+  width: 100%;
+  height: 44px;
 
-export const Title = styled.span<Props>`
   font-family: "Montserrat", sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -30,4 +31,10 @@ export const Title = styled.span<Props>`
 
   color: ${({ theme, color }) =>
     color === "green" ? theme.colors.surface : theme.colors.black100};
+
+  border-radius: 8px;
+
+  :hover {
+    color: var(--surface);
+  }
 `;

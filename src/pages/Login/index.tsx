@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -6,6 +6,10 @@ import * as yup from "yup";
 import api from "../../services/api";
 import { Input } from "../../components/Input";
 import { ButtonForm } from "../../components/ButtonForm";
+
+import { ReactComponent as GoogleIcon } from "../../assets/google.svg";
+import { ReactComponent as FaceIcon } from "../../assets/Facebook.svg";
+import { ReactComponent as AppleIcon } from "../../assets/apple.svg";
 
 import {
   Container,
@@ -15,8 +19,13 @@ import {
   Footer,
   Title,
   SubTitle,
+  Button,
+  LoginSocial,
+  LoginWithGoogle,
+  LoginWithFace,
+  LoginWithApple,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { Divider } from "../../components/Divider";
 
 interface FormProps {
   email: string;
@@ -54,14 +63,21 @@ export function Login() {
     api
       .post("/login", request)
       .then((response) => {
-        localStorage.setItem("user", response.data);
-        navigate("/");
+        localStorage.setItem("token", response.data);
+
+        api
+          .get(`/users/getUsersByEmail`, { params: { email: data.email } })
+          .then((response) => {
+            localStorage.setItem("user", response.data.id);
+            navigate("/");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((e) => {
         console.log(e);
-      })
-      .finally(() => {
-        console.log("logado!");
+        alert("E-mail ou Senha não confere!");
       });
   };
 
@@ -101,9 +117,9 @@ export function Login() {
               <input type="checkbox"></input>
               <label>Salvar senha</label>
             </div>
-            <button onClick={() => navigate("/esquecisenha")}>
+            <Button onClick={() => navigate("/esquecisenha")}>
               Esqueci a senha
-            </button>
+            </Button>
           </div>
           <ButtonForm
             type="submit"
@@ -112,11 +128,24 @@ export function Login() {
             onClick={() => console.log("clicado!")}
           />
         </Body>
+        <Divider />
+        <LoginSocial>
+          <LoginWithGoogle>
+            <GoogleIcon style={{ marginRight: "12px" }} />
+            Entrar com Google
+          </LoginWithGoogle>
+          <LoginWithFace>
+            <FaceIcon style={{ marginRight: "12px" }} />
+            Entrar com Facebook
+          </LoginWithFace>
+          <LoginWithApple>
+            <AppleIcon style={{ marginRight: "12px" }} />
+            Entrar com Apple
+          </LoginWithApple>
+        </LoginSocial>
         <Footer>
-          <SubTitle>
-            Não tem uma conta?{" "}
-            <button onClick={() => navigate("/cadastro")}>Cadastrar</button>
-          </SubTitle>
+          <SubTitle>Não tem uma conta? </SubTitle>
+          <Button onClick={() => navigate("/cadastrar")}>Cadastrar</Button>
         </Footer>
       </Form>
     </Container>

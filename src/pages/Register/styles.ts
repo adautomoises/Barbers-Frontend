@@ -32,6 +32,7 @@ export const Title = styled.label`
   font-weight: bold;
   line-height: 24px;
   margin-bottom: 0.5rem;
+  text-transform: uppercase;
 `;
 
 export const SubTitle = styled.label`
@@ -39,6 +40,7 @@ export const SubTitle = styled.label`
   font-size: 12px;
   font-weight: normal;
   line-height: 24px;
+  text-transform: uppercase;
 `;
 
 export const Body = styled.form`
@@ -53,5 +55,9 @@ export const Body = styled.form`
 export const Footer = styled.div`
   display: flex;
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+`;
+
+export const Button = styled.button`
+  color: var(--primary);
 `;
