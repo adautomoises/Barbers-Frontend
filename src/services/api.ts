@@ -33,8 +33,8 @@ api.interceptors.response.use(
     const error401 = error.response?.status;
 
     if (error401 === 401) {
+      localStorage.removeItem("id");
       localStorage.removeItem("token");
-      localStorage.removeItem("user");
 
       alert("Sessão Expirada! Por favor, faça login novamente.");
       window.location.href = "/entrar";

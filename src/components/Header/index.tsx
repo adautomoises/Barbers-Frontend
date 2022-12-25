@@ -41,9 +41,9 @@ export function Header({ Items, Actions }: Props) {
   };
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
+    const userId = localStorage.getItem("id");
     api
-      .get(`/users/getUsersById`, { params: { uuid: loggedInUser } })
+      .get(`/users/getUsersById`, { params: { uuid: userId } })
       .then((response) => {
         setUser(response.data);
       })

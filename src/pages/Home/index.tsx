@@ -13,9 +13,9 @@ export function Home() {
   const dataFooter = ["Home", "Parceiros", "Serviços", "Sobre", "Ajuda"];
 
   useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    if (loggedInUser) {
-      setUser(loggedInUser);
+    const userId = localStorage.getItem("id");
+    if (userId) {
+      setUser(userId);
       setActions("Auth");
     } else {
       setActions("Login");

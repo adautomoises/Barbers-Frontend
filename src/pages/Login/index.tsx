@@ -63,17 +63,9 @@ export function Login() {
     api
       .post("/login", request)
       .then((response) => {
-        localStorage.setItem("token", response.data);
-
-        api
-          .get(`/users/getUsersByEmail`, { params: { email: data.email } })
-          .then((response) => {
-            localStorage.setItem("user", response.data.id);
-            navigate("/");
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+        localStorage.setItem("id", response.data.id);
+        localStorage.setItem("token", response.data.token);
+        navigate("/");
       })
       .catch((e) => {
         console.log(e);
