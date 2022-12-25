@@ -17,10 +17,14 @@ export const Container = styled.main`
 
 export const MenuItems = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 
   width: 50%;
+`;
+
+export const Button = styled.button`
+  margin: 10px;
 `;
 
 export const LoginSignIn = styled.div`

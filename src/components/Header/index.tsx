@@ -6,6 +6,7 @@ import { ReactComponent as Logo } from "../../assets/logo.svg";
 import {
   Container,
   MenuItems,
+  Button,
   LoginSignIn,
   Login,
   SignIn,
@@ -26,18 +27,24 @@ export function Header({ Items, Actions }: Props) {
     window.location.reload();
   };
 
+  const handleNavigate = (name: string) => {
+    navigate(`/${name}`);
+  };
+
   return (
     <Container>
       <Logo style={{ width: "25%" }} fill={"white"} />
       <MenuItems>
         {Items.map((item, index) => (
-          <button key={index}>{item}</button>
+          <Button onClick={() => handleNavigate(item)} key={index}>
+            {item}
+          </Button>
         ))}
       </MenuItems>
       {Actions === "Login" ? (
         <LoginSignIn>
           <Login onClick={() => navigate("/entrar")}>Entrar</Login>
-          <SignIn onClick={() => navigate("/cadastro")}>Cadastrar</SignIn>
+          <SignIn onClick={() => navigate("/cadastrar")}>Cadastrar</SignIn>
         </LoginSignIn>
       ) : (
         <LoginSignIn>

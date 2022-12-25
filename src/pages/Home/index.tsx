@@ -13,7 +13,8 @@ export function Home() {
   const [user, setUser] = useState("");
   const [actions, setActions] = useState("Login");
 
-  const data = ["Parceiros", "Serviços", "Sobre"];
+  const dataHeader = ["Parceiros", "Serviços", "Sobre"];
+  const dataFooter = ["Home", "Parceiros", "Serviços", "Sobre", "Ajuda"];
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("user");
@@ -50,11 +51,11 @@ export function Home() {
 
   return (
     <Container>
-      <Header Items={data} Actions={actions} />
+      <Header Items={dataHeader} Actions={actions} />
       <Main>
         <Carousel images={eventCarousel} />
       </Main>
-      <Footer />
+      <Footer Items={dataFooter} />
     </Container>
   );
 }
