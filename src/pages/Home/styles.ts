@@ -6,11 +6,11 @@ export const Container = styled.main`
   align-items: center;
 
   flex-direction: column;
-
-  width: 100%;
-  height: 100%;
 `;
 
-export const Main = styled.main``;
+export const Main = styled.main`
+  width: 100vw;
+  height: 100vh;
+`;
 
 export const Button = styled.button``;
