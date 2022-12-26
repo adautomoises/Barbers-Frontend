@@ -76,8 +76,6 @@ export function Register() {
   });
 
   const onSubmit = (data: FormProps) => {
-    console.log(data);
-
     let request = {
       email: data.email,
       fullName: data.fullName,
@@ -87,14 +85,25 @@ export function Register() {
 
     api
       .post("/users", request)
-      .then((response) => {
-        console.log(response.data);
+      .then(() => {
+        let request = {
+          email: data.email,
+          password: data.password,
+        };
+
+        api
+          .post("/login", request)
+          .then((response) => {
+            localStorage.setItem("id", response.data.id);
+            localStorage.setItem("token", response.data.token);
+            navigate("/");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((e) => {
         console.log(e);
-      })
-      .finally(() => {
-        console.log("postado!");
       });
   };
 

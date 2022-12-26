@@ -53,8 +53,6 @@ export function Login() {
   });
 
   const onSubmit = (data: FormProps) => {
-    console.log(data);
-
     let request = {
       email: data.email,
       password: data.password,
