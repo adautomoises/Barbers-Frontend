@@ -49,13 +49,14 @@ export const Body = styled.form`
 
   width: 404px;
 
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 `;
 
 export const Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 export const Button = styled.button`

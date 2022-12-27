@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -36,27 +37,27 @@ const schema = yup.object({
   password: yup
     .string()
     .required("Senha é obrigatório")
-    .min(8, "A senha é muito curta")
-    .test(
-      "isValidPass",
-      "Senha deve ter pelo menos 8 caracteres, uma letra maíuscula e um símbolo",
-      (value: any) => {
-        const hasUpperCase = /[A-Z]/.test(value);
-        const hasNumber = /[0-9]/.test(value);
-        const hasLowerCase = /[a-z]/.test(value);
-        const hasSymbole = /["!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"]/.test(value);
-        let validConditions = 0;
-        const numberOfMustBeValidConditions = 3;
-        const conditions = [hasUpperCase, hasLowerCase, hasNumber, hasSymbole];
-        conditions.forEach((condition) =>
-          condition ? validConditions++ : null
-        );
-        if (validConditions >= numberOfMustBeValidConditions) {
-          return true;
-        }
-        return false;
-      }
-    ),
+    .min(6, "A senha é muito curta, mínimo de 6 caracteres!"),
+  // .test(
+  //   "isValidPass",
+  //   "Senha deve ter pelo menos 8 caracteres, uma letra maíuscula e um símbolo",
+  //   (value: any) => {
+  //     const hasUpperCase = /[A-Z]/.test(value);
+  //     const hasNumber = /[0-9]/.test(value);
+  //     const hasLowerCase = /[a-z]/.test(value);
+  //     const hasSymbole = /["!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"]/.test(value);
+  //     let validConditions = 0;
+  //     const numberOfMustBeValidConditions = 3;
+  //     const conditions = [hasUpperCase, hasLowerCase, hasNumber, hasSymbole];
+  //     conditions.forEach((condition) =>
+  //       condition ? validConditions++ : null
+  //     );
+  //     if (validConditions >= numberOfMustBeValidConditions) {
+  //       return true;
+  //     }
+  //     return false;
+  //   }
+  // ),
   passwordConfirmation: yup
     .string()
     .required("Confirmação de senha é obrigatório")
@@ -65,6 +66,7 @@ const schema = yup.object({
 
 export function Register() {
   const navigate = useNavigate();
+  const [emailUserExists, setEmailUserExists] = useState();
 
   const {
     register,
@@ -103,7 +105,7 @@ export function Register() {
           });
       })
       .catch((e) => {
-        console.log(e);
+        setEmailUserExists(e.response.data.message);
       });
   };
 
@@ -130,6 +132,7 @@ export function Register() {
             placeholder="Nome de Usuário"
             register={{ ...register("userName") }}
             error={errors.userName?.message}
+            onBlur
           />
           <Input
             title={"E-mail"}
@@ -138,6 +141,7 @@ export function Register() {
             placeholder="E-mail"
             register={{ ...register("email") }}
             error={errors.email?.message}
+            onBlur
           />
           <Input
             title={"Senha"}
@@ -155,16 +159,27 @@ export function Register() {
             placeholder="Confirmar Senha"
             error={errors.passwordConfirmation?.message}
           />
-          <ButtonForm
-            type="submit"
-            title="Cadastrar"
-            color="green"
-            onClick={() => console.log("clicado!")}
-          />
+          <ButtonForm type="submit" title="Cadastrar" color="green" />
         </Body>
         <Footer>
-          <SubTitle>Já possui uma conta? </SubTitle>
-          <Button onClick={() => navigate("/entrar")}>Entrar</Button>
+          {emailUserExists && (
+            <div
+              style={{
+                color: "#ff003d",
+                fontFamily: "Montserrat, sans-serif",
+                fontSize: "12px",
+                fontWeight: "normal",
+                lineHeight: "24px",
+                textTransform: "uppercase",
+              }}
+            >
+              E-mail ou usuário já cadastrado.
+            </div>
+          )}
+          <div>
+            <SubTitle>Já possui uma conta? </SubTitle>
+            <Button onClick={() => navigate("/entrar")}>Entrar</Button>
+          </div>
         </Footer>
       </Form>
     </Container>

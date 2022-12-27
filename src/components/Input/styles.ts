@@ -34,4 +34,6 @@ export const Error = styled.p`
   font-size: 12px;
   font-weight: normal;
   text-transform: uppercase;
+
+  color: var(--Error);
 `;
