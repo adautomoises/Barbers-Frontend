@@ -26,6 +26,7 @@ export const InputField = styled.input`
 
   padding: 10px 14px;
   border-radius: 8px;
+  border: 1px solid var(--gray-light);
   margin-bottom: 5px;
 `;
 

@@ -10,7 +10,7 @@ export const Container = styled.main`
   width: 100%;
   height: 100px;
 
-  background-color: var(--black100);
+  background-color: var(--secondary-light);
 `;
 
 export const MenuItems = styled.div`
@@ -23,6 +23,10 @@ export const MenuItems = styled.div`
 
 export const Button = styled.button`
   margin: 10px;
+
+  :hover {
+    background-color: var(--secondary);
+  }
 `;
 
 export const Copyright = styled.label`

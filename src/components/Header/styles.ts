@@ -25,6 +25,11 @@ export const MenuItems = styled.div`
 
 export const Button = styled.button`
   margin: 10px;
+  background-color: var(--secondary50);
+
+  :hover {
+    background-color: var(--secondary);
+  }
 `;
 
 export const LoginSignIn = styled.div`
@@ -36,12 +41,29 @@ export const LoginSignIn = styled.div`
   gap: 1rem;
 `;
 
-export const Login = styled.button``;
+export const Login = styled.button`
+  background-color: var(--secondary50);
+
+  :hover {
+    background-color: var(--primary);
+  }
+`;
 
 export const SignIn = styled.button`
-  background-color: var(--primary);
+  background-color: var(--secondary50);
+
+  :hover {
+    background-color: var(--primary);
+  }
 `;
 
 export const User = styled.label``;
 
-export const Logout = styled.button``;
+export const Logout = styled.button`
+  background-color: var(--secondary50);
+
+  :hover {
+    color: var(--Error);
+    background-color: var(--background);
+  }
+`;

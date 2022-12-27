@@ -18,16 +18,14 @@ export const Image = styled.img`
 
 export const ContainerButtonUp = styled.div`
   position: absolute;
-  top: 45%;
-  left: 33%;
-
+  top: 330px;
+  left: calc(50% - 500px);
   transform: rotate(90deg);
 `;
 export const ContainerButtonDown = styled.div`
   position: absolute;
-  top: 55%;
-  left: 33%;
-
+  top: 390px;
+  left: calc(50% - 500px);
   transform: rotate(90deg);
 `;
 export const ScrollUp = styled.button`
@@ -37,6 +35,12 @@ export const ScrollUp = styled.button`
   border: 1px solid white;
   font-weight: bolder;
   font-size: 25px;
+
+  background-color: var(--secondary50);
+
+  :hover {
+    background-color: var(--secondary);
+  }
 `;
 export const ScrollDown = styled.button`
   display: flex;
@@ -45,4 +49,10 @@ export const ScrollDown = styled.button`
   border: 1px solid white;
   font-weight: bolder;
   font-size: 25px;
+
+  background-color: var(--secondary50);
+
+  :hover {
+    background-color: var(--secondary);
+  }
 `;

@@ -17,6 +17,8 @@ import {
   Title,
   SubTitle,
   Button,
+  Error,
+  GoBack,
 } from "./styles";
 
 interface FormProps {
@@ -113,6 +115,7 @@ export function Register() {
     <Container>
       <Form>
         <Header>
+          <GoBack onClick={() => navigate("/")}>🡠 Voltar ao Início</GoBack>
           <Title>Bem-vindo</Title>
           <SubTitle>Bem-vindo! Por favor, informe seus dados.</SubTitle>
         </Header>
@@ -162,21 +165,15 @@ export function Register() {
           <ButtonForm type="submit" title="Cadastrar" color="green" />
         </Body>
         <Footer>
-          {emailUserExists && (
-            <div
-              style={{
-                color: "#ff003d",
-                fontFamily: "Montserrat, sans-serif",
-                fontSize: "12px",
-                fontWeight: "normal",
-                lineHeight: "24px",
-                textTransform: "uppercase",
-              }}
-            >
-              E-mail ou usuário já cadastrado.
-            </div>
-          )}
-          <div>
+          {emailUserExists && <Error>E-mail ou usuário já cadastrado.</Error>}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
             <SubTitle>Já possui uma conta? </SubTitle>
             <Button onClick={() => navigate("/entrar")}>Entrar</Button>
           </div>

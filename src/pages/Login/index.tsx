@@ -20,10 +20,14 @@ import {
   Title,
   SubTitle,
   Button,
+  ForgetPassword,
+  ContainerCheckBox,
+  CheckBox,
   LoginSocial,
   LoginWithGoogle,
   LoginWithFace,
   LoginWithApple,
+  GoBack,
 } from "./styles";
 import { Divider } from "../../components/Divider";
 
@@ -75,6 +79,7 @@ export function Login() {
     <Container>
       <Form>
         <Header>
+          <GoBack onClick={() => navigate("/")}>🡠 Voltar ao Início</GoBack>
           <Title>Bem-vindo</Title>
           <SubTitle>Bem-vindo! Por favor, informe sua conta.</SubTitle>
         </Header>
@@ -95,22 +100,15 @@ export function Login() {
             register={{ ...register("password") }}
             error={errors.password?.message}
           />
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              flexDirection: "row",
-            }}
-          >
-            <div>
-              <input type="checkbox"></input>
+          <ForgetPassword>
+            <ContainerCheckBox>
+              <CheckBox type="checkbox" />
               <label>Salvar senha</label>
-            </div>
+            </ContainerCheckBox>
             <Button onClick={() => navigate("/esquecisenha")}>
               Esqueci a senha
             </Button>
-          </div>
+          </ForgetPassword>
           <ButtonForm type="submit" title="Entrar" color="green" />
         </Body>
         <Divider />

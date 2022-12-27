@@ -61,4 +61,34 @@ export const Footer = styled.div`
 
 export const Button = styled.button`
   color: var(--primary);
+
+  :hover {
+    color: var(--surface);
+    background-color: var(--primary);
+  }
+`;
+
+export const Error = styled.label`
+  color: var(--Error);
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 24px;
+  text-transform: uppercase;
+`;
+
+export const GoBack = styled.button`
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 44px;
+  color: black;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+
+  :hover {
+    color: var(--surface);
+    background-color: var(--primary);
+  }
 `;
