@@ -111,12 +111,7 @@ export function Login() {
               Esqueci a senha
             </Button>
           </div>
-          <ButtonForm
-            type="submit"
-            title="Entrar"
-            color="green"
-            onClick={() => console.log("clicado!")}
-          />
+          <ButtonForm type="submit" title="Entrar" color="green" />
         </Body>
         <Divider />
         <LoginSocial>
