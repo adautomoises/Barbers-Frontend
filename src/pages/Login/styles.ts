@@ -13,7 +13,7 @@ export const Container = styled.main`
   font-family: "Libre Baskerville", serif;
   font-size: 1rem;
   font-weight: normal;
-  color: var(--black100);
+  color: ${({ theme }) => theme.colors.black100};
 `;
 
 export const Form = styled.div`
@@ -88,21 +88,22 @@ export const CheckBox = styled.input`
 
   width: 16px;
   height: 16px;
-  border: 1px solid var(--gray-light);
+  border: 1px solid ${({ theme }) => theme.colors.gray_light};
   border-radius: 2px;
 
   transition: background-color 0.5s;
 
   :checked {
     border: none;
-    background-color: var(--Confirm);
+    background-color: ${({ theme }) => theme.colors.Confirm};
 
     /* ::before {
       content: "X";
       display: flex;
       justify-content: center;
       align-items: center;
-      color: var(--black100);
+      color:   border: 1px solid ${({ theme }) => theme.colors.black100};
+
     } */
   }
 `;
@@ -116,11 +117,11 @@ export const Footer = styled.div`
 `;
 
 export const Button = styled.button`
-  color: var(--primary);
+  color: ${({ theme }) => theme.colors.primary};
 
   :hover {
-    color: var(--surface);
-    background-color: var(--primary);
+    color: ${({ theme }) => theme.colors.surface};
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
@@ -142,15 +143,15 @@ export const LoginWithGoogle = styled.button`
 
   width: 100%;
 
-  color: var(--black100);
+  color: ${({ theme }) => theme.colors.black100};
 
-  border: 1px solid var(--gray-light);
+  border: 1px solid ${({ theme }) => theme.colors.gray_light};
   border-radius: 8px;
 
   transition: border-color 0.5s, background-color 0.5s, color 0.5s;
   :hover {
     border: none;
-    color: var(--surface);
+    color: ${({ theme }) => theme.colors.surface};
     background: linear-gradient(to right, #eb4335, #fbbc05, #34a853, #4285f4);
   }
 `;
@@ -162,14 +163,14 @@ export const LoginWithFace = styled.button`
 
   width: 100%;
 
-  color: var(--black100);
+  color: ${({ theme }) => theme.colors.black100};
 
-  border: 1px solid var(--gray-light);
+  border: 1px solid ${({ theme }) => theme.colors.gray_light};
   border-radius: 8px;
 
   :hover {
     border: none;
-    color: var(--surface);
+    color: ${({ theme }) => theme.colors.surface};
     background-color: #1877f2;
   }
 `;
@@ -181,14 +182,14 @@ export const LoginWithApple = styled.button`
 
   width: 100%;
 
-  color: var(--black100);
+  color: ${({ theme }) => theme.colors.black100};
 
   border: 1px solid var(--gray-light);
   border-radius: 8px;
 
   :hover {
     border: none;
-    color: var(--surface);
+    color: ${({ theme }) => theme.colors.surface};
     background-color: #283544;
   }
 `;
@@ -198,13 +199,13 @@ export const GoBack = styled.button`
   align-items: center;
   width: max-content;
   height: 44px;
-  color: black;
+  color: ${({ theme }) => theme.colors.black100};
   font-size: 12px;
   text-transform: uppercase;
   margin-bottom: 1rem;
 
   :hover {
-    color: var(--surface);
-    background-color: var(--primary);
+    color: ${({ theme }) => theme.colors.surface};
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;

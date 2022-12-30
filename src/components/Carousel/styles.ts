@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+interface Props {
+  photo: string;
+}
+
 export const Container = styled.main`
   overflow-y: hidden;
 
@@ -10,7 +14,7 @@ export const Container = styled.main`
   height: 720px;
 `;
 
-export const Image = styled.img`
+export const Image = styled.img<Props>`
   object-fit: contain;
   width: auto;
   height: 720px;
@@ -32,27 +36,27 @@ export const ScrollUp = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
+  border: 1px solid ${({ theme }) => theme.colors.surface};
   font-weight: bolder;
   font-size: 25px;
 
-  background-color: var(--secondary50);
+  background-color: ${({ theme }) => theme.colors.secondary50};
 
   :hover {
-    background-color: var(--secondary);
+    background-color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 export const ScrollDown = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid white;
+  border: 1px solid ${({ theme }) => theme.colors.surface};
   font-weight: bolder;
   font-size: 25px;
 
-  background-color: var(--secondary50);
+  background-color: ${({ theme }) => theme.colors.secondary50};
 
   :hover {
-    background-color: var(--secondary);
+    background-color: ${({ theme }) => theme.colors.secondary};
   }
 `;

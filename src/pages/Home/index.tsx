@@ -6,11 +6,11 @@ import { Header } from "../../components/Header";
 import { Container, Main } from "./styles";
 
 export function Home() {
-  const [user, setUser] = useState("");
+  const [_, setUser] = useState("");
   const [actions, setActions] = useState("Login");
 
   const dataHeader = ["Parceiros", "Serviços", "Sobre"];
-  const dataFooter = ["Home", "Parceiros", "Serviços", "Sobre", "Ajuda"];
+  const dataFooter = ["Parceiros", "Serviços", "Sobre", "Ajuda"];
 
   useEffect(() => {
     const userId = localStorage.getItem("id");

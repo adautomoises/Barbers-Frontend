@@ -12,7 +12,7 @@ export const Container = styled.main`
   width: 100%;
   height: 100px;
 
-  background-color: var(--secondary50);
+  background-color: ${({ theme }) => theme.colors.secondary50};
 `;
 
 export const MenuItems = styled.div`
@@ -25,10 +25,10 @@ export const MenuItems = styled.div`
 
 export const Button = styled.button`
   margin: 10px;
-  background-color: var(--secondary50);
+  background-color: ${({ theme }) => theme.colors.secondary50};
 
   :hover {
-    background-color: var(--secondary);
+    background-color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 
@@ -42,28 +42,28 @@ export const LoginSignIn = styled.div`
 `;
 
 export const Login = styled.button`
-  background-color: var(--secondary50);
+  background-color: ${({ theme }) => theme.colors.secondary50};
 
   :hover {
-    background-color: var(--primary);
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
 export const SignIn = styled.button`
-  background-color: var(--secondary50);
+  background-color: ${({ theme }) => theme.colors.secondary50};
 
   :hover {
-    background-color: var(--primary);
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
 export const User = styled.label``;
 
 export const Logout = styled.button`
-  background-color: var(--secondary50);
+  background-color: ${({ theme }) => theme.colors.secondary50};
 
   :hover {
-    color: var(--Error);
-    background-color: var(--background);
+    color: ${({ theme }) => theme.colors.Error};
+    background-color: ${({ theme }) => theme.colors.background};
   }
 `;

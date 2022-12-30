@@ -13,8 +13,17 @@ export const Title = styled.label`
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   font-weight: 500;
-  color: var(--black100);
+  color: ${({ theme }) => theme.colors.black100};
   margin-bottom: 0.25rem;
+`;
+
+export const InputContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  width: 100%;
+  flex-direction: row;
 `;
 
 export const InputField = styled.input`
@@ -26,7 +35,7 @@ export const InputField = styled.input`
 
   padding: 10px 14px;
   border-radius: 8px;
-  border: 1px solid var(--gray-light);
+  border: 1px solid ${({ theme }) => theme.colors.gray_light};
   margin-bottom: 5px;
 `;
 
@@ -36,5 +45,5 @@ export const Error = styled.p`
   font-weight: normal;
   text-transform: uppercase;
 
-  color: var(--Error);
+  color: ${({ theme }) => theme.colors.Error};
 `;

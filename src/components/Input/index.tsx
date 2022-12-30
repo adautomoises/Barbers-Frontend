@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import api from "../../services/api";
 
-import { Container, Title, InputField, Error } from "./styles";
+import { Container, Title, InputContainer, InputField, Error } from "./styles";
 
 interface Props {
   title: string;

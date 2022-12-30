@@ -13,7 +13,7 @@ export const Container = styled.main`
   font-family: "Libre Baskerville", serif;
   font-size: 1rem;
   font-weight: normal;
-  color: var(--black100);
+  color: ${({ theme }) => theme.colors.black100};
 `;
 
 export const Form = styled.div`
@@ -60,16 +60,16 @@ export const Footer = styled.div`
 `;
 
 export const Button = styled.button`
-  color: var(--primary);
+  color: ${({ theme }) => theme.colors.primary};
 
   :hover {
-    color: var(--surface);
-    background-color: var(--primary);
+    color: ${({ theme }) => theme.colors.surface};
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;
 
 export const Error = styled.label`
-  color: var(--Error);
+  color: ${({ theme }) => theme.colors.Error};
   font-family: "Montserrat", sans-serif;
   font-size: 12px;
   font-weight: normal;
@@ -82,13 +82,13 @@ export const GoBack = styled.button`
   align-items: center;
   width: max-content;
   height: 44px;
-  color: black;
+  color: ${({ theme }) => theme.colors.black100};
   font-size: 12px;
   text-transform: uppercase;
   margin-bottom: 1rem;
 
   :hover {
-    color: var(--surface);
-    background-color: var(--primary);
+    color: ${({ theme }) => theme.colors.surface};
+    background-color: ${({ theme }) => theme.colors.primary};
   }
 `;

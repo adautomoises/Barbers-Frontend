@@ -10,7 +10,7 @@ export const Container = styled.main`
   width: 100%;
   height: 100px;
 
-  background-color: var(--secondary-light);
+  background-color: ${({ theme }) => theme.colors.secondary_light};
 `;
 
 export const MenuItems = styled.div`
@@ -25,7 +25,7 @@ export const Button = styled.button`
   margin: 10px;
 
   :hover {
-    background-color: var(--secondary);
+    background-color: ${({ theme }) => theme.colors.secondary};
   }
 `;
 

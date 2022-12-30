@@ -16,7 +16,7 @@ export const Container = styled.main<Props>`
     color === "green" ? theme.colors.Confirm : theme.colors.Error};
 
   :hover {
-    background-color: green;
+    background-color: ${({ theme }) => theme.colors.green};
   }
 `;
 
@@ -35,6 +35,6 @@ export const Button = styled.button<Props>`
   border-radius: 8px;
 
   :hover {
-    color: var(--surface);
+    color: ${({ theme }) => theme.colors.surface};
   }
 `;

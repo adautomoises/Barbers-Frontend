@@ -19,6 +19,6 @@ export const Container = styled.main`
 export const Line = styled.div`
   width: 100%;
   height: 1px;
-  background-color: var(--gray);
+  background-color: ${({ theme }) => theme.colors.gray};
   margin: 0 2px;
 `;

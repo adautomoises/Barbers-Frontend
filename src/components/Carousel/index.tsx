@@ -9,14 +9,14 @@ import {
   ScrollDown,
 } from "./styles";
 
-type Props = {
+interface Props {
   images: {
     id: string;
     photo: string;
     title: string;
     subtitle?: string;
   }[];
-};
+}
 
 export function Carousel({ images }: Props) {
   const [data, setData] = useState<Props>();
@@ -47,7 +47,7 @@ export function Carousel({ images }: Props) {
   return (
     <Container ref={carousel}>
       {images.map((item) => (
-        <Image key={item.id} src={item.photo} />
+        <Image key={item.id} src={item.photo} photo={item.photo} />
       ))}
       <ContainerButtonUp>
         <ScrollUp onClick={handleCarouselLast}>{"<"}</ScrollUp>
