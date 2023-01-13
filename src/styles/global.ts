@@ -30,7 +30,6 @@ button {
 button {
   cursor: pointer;
   border: 1px solid ${({ theme }) => theme.colors.gray_light};
-  border-radius: 8px;
   background: none;
   height: 44px;
   padding: 10px;

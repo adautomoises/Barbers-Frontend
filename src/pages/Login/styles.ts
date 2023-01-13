@@ -184,7 +184,7 @@ export const LoginWithApple = styled.button`
 
   color: ${({ theme }) => theme.colors.black100};
 
-  border: 1px solid var(--gray-light);
+  border: 1px solid ${({ theme }) => theme.colors.gray_light};
   border-radius: 8px;
 
   :hover {

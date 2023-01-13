@@ -32,7 +32,8 @@ export function Header({ Items, Actions }: Props) {
   const [user, setUser] = useState<UserProps>();
 
   const handleLogout = () => {
-    localStorage.clear();
+    localStorage.removeItem("@barbers:user-id-1.0.0");
+    localStorage.removeItem("@barbers:user-token-1.0.0");
     window.location.reload();
   };
 
@@ -41,7 +42,7 @@ export function Header({ Items, Actions }: Props) {
   };
 
   useEffect(() => {
-    const userId = localStorage.getItem("id");
+    const userId = localStorage.getItem("@barbers:user-id-1.0.0");
     api
       .get(`/users/getUsersById`, { params: { uuid: userId } })
       .then((response) => {
@@ -51,6 +52,10 @@ export function Header({ Items, Actions }: Props) {
         console.log(e);
       });
   }, []);
+
+  const handleRegisterService = () => {
+    navigate("/cadastrarmeunegocio");
+  };
 
   return (
     <Container>

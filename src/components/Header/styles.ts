@@ -9,7 +9,7 @@ export const Container = styled.main`
   justify-content: space-around;
   align-items: center;
 
-  width: 100%;
+  width: 100vw;
   height: 100px;
 
   background-color: ${({ theme }) => theme.colors.secondary50};
@@ -24,11 +24,12 @@ export const MenuItems = styled.div`
 `;
 
 export const Button = styled.button`
-  margin: 10px;
-  background-color: ${({ theme }) => theme.colors.secondary50};
+  border: none;
 
   :hover {
-    background-color: ${({ theme }) => theme.colors.secondary};
+    border: none;
+    color: black;
+    background-color: ${({ theme }) => theme.colors.surface};
   }
 `;
 
@@ -42,22 +43,26 @@ export const LoginSignIn = styled.div`
 `;
 
 export const Login = styled.button`
-  background-color: ${({ theme }) => theme.colors.secondary50};
+  border: none;
 
   :hover {
-    background-color: ${({ theme }) => theme.colors.primary};
+    border: none;
+    color: ${({ theme }) => theme.colors.black100};
+    background-color: ${({ theme }) => theme.colors.surface};
   }
 `;
 
 export const SignIn = styled.button`
-  background-color: ${({ theme }) => theme.colors.secondary50};
+  border-radius: 0;
+  background-color: ${({ theme }) => theme.colors.primary};
 
   :hover {
-    background-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.black100};
+    background-color: ${({ theme }) => theme.colors.surface};
   }
 `;
 
-export const User = styled.label``;
+export const User = styled.button``;
 
 export const Logout = styled.button`
   background-color: ${({ theme }) => theme.colors.secondary50};

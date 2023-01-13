@@ -6,11 +6,13 @@ export const Container = styled.main`
   align-items: center;
 
   flex-direction: column;
-`;
 
-export const Main = styled.main`
   width: 100vw;
   height: 100vh;
+
+  background-color: ${({ theme }) => theme.colors.background};
 `;
+
+export const Main = styled.main``;
 
 export const Button = styled.button``;

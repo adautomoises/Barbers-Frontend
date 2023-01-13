@@ -1,27 +1,8 @@
-import { useEffect, useState } from "react";
 import { Carousel } from "../../components/Carousel";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
 
 import { Container, Main } from "./styles";
 
 export function Home() {
-  const [_, setUser] = useState("");
-  const [actions, setActions] = useState("Login");
-
-  const dataHeader = ["Parceiros", "Serviços", "Sobre"];
-  const dataFooter = ["Parceiros", "Serviços", "Sobre", "Ajuda"];
-
-  useEffect(() => {
-    const userId = localStorage.getItem("id");
-    if (userId) {
-      setUser(userId);
-      setActions("Auth");
-    } else {
-      setActions("Login");
-    }
-  }, []);
-
   const eventCarousel = [
     {
       id: "1",
@@ -47,11 +28,9 @@ export function Home() {
 
   return (
     <Container>
-      <Header Items={dataHeader} Actions={actions} />
       <Main>
         <Carousel images={eventCarousel} />
       </Main>
-      <Footer Items={dataFooter} />
     </Container>
   );
 }

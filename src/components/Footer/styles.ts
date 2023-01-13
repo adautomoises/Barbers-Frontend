@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   position: absolute;
+  z-index: 2;
   bottom: 0;
 
   display: flex;
   align-items: center;
 
-  width: 100%;
+  width: 100vw;
   height: 100px;
 
   background-color: ${({ theme }) => theme.colors.secondary_light};
@@ -35,4 +36,6 @@ export const Copyright = styled.label`
   align-items: center;
 
   width: 25%;
+
+  color: ${({ theme }) => theme.colors.surface};
 `;

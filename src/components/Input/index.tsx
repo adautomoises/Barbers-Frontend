@@ -1,7 +1,4 @@
-import React, { useState } from "react";
-import api from "../../services/api";
-
-import { Container, Title, InputContainer, InputField, Error } from "./styles";
+import { Container, Title, InputField, Error } from "./styles";
 
 interface Props {
   title: string;
@@ -20,26 +17,26 @@ export function Input({
   register,
   placeholder,
   error,
-  onBlur,
-}: Props) {
-  const [userNameExists, setUserNameExists] = useState();
-  const [emailExists, setEmailExists] = useState();
+}: // onBlur,
+Props) {
+  // const [userNameExists, setUserNameExists] = useState();
+  // const [emailExists, setEmailExists] = useState();
 
-  const handleValidate = (value: string) => {
-    if (name === "email") {
-      api
-        .get("/users/emailExists", { params: { email: value } })
-        .then((response) => {
-          setEmailExists(response.data);
-        });
-    } else if (name === "userName") {
-      api
-        .get("/users/userNameExists", { params: { userName: value } })
-        .then((response) => {
-          setUserNameExists(response.data);
-        });
-    }
-  };
+  // const handleValidate = (value: string) => {
+  //   if (name === "email") {
+  //     api
+  //       .get("/users/emailExists", { params: { email: value } })
+  //       .then((response) => {
+  //         setEmailExists(response.data);
+  //       });
+  //   } else if (name === "userName") {
+  //     api
+  //       .get("/users/userNameExists", { params: { userName: value } })
+  //       .then((response) => {
+  //         setUserNameExists(response.data);
+  //       });
+  //   }
+  // };
 
   return (
     <Container>
@@ -49,14 +46,14 @@ export function Input({
         {...register}
         name={name}
         placeholder={placeholder}
-        onBlur={(event) => {
-          if (onBlur) {
-            handleValidate(event.target.value);
-          }
-        }}
+        // onBlur={(event) => {
+        //   if (onBlur) {
+        //     handleValidate(event.target.value);
+        //   }
+        // }}
       ></InputField>
       <Error>{error}</Error>
-      <Error>
+      {/* <Error>
         {name === "userName" && onBlur ? (
           userNameExists === true && (
             <>Esse nome de usuário já está em uso. Tente outro.</>
@@ -66,7 +63,7 @@ export function Input({
         ) : (
           <></>
         )}
-      </Error>
+      </Error> */}
     </Container>
   );
 }

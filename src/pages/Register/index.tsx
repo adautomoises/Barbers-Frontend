@@ -98,8 +98,11 @@ export function Register() {
         api
           .post("/login", request)
           .then((response) => {
-            localStorage.setItem("id", response.data.id);
-            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("@barbers:user-id-1.0.0", response.data.id);
+            localStorage.setItem(
+              "@barbers:user-token-1.0.0",
+              response.data.token
+            );
             navigate("/");
           })
           .catch((e) => {
@@ -135,7 +138,7 @@ export function Register() {
             placeholder="Nome de Usuário"
             register={{ ...register("userName") }}
             error={errors.userName?.message}
-            onBlur
+            // onBlur
           />
           <Input
             title={"E-mail"}
@@ -144,7 +147,7 @@ export function Register() {
             placeholder="E-mail"
             register={{ ...register("email") }}
             error={errors.email?.message}
-            onBlur
+            // onBlur
           />
           <Input
             title={"Senha"}
@@ -165,7 +168,7 @@ export function Register() {
           <ButtonForm type="submit" title="Cadastrar" color="green" />
         </Body>
         <Footer>
-          {emailUserExists && <Error>E-mail ou usuário já cadastrado.</Error>}
+          {emailUserExists && <Error>{emailUserExists}</Error>}
           <div
             style={{
               display: "flex",

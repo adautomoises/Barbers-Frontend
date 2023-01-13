@@ -16,6 +16,7 @@ export const defaultTheme = {
     surface: "#ffffff",
 
     primary: "#f0b45b",
+    primary_dark: "#f0b45b",
     primary50: "#f0b45b50",
     primary_light: "#fbe7c9",
 
@@ -23,6 +24,6 @@ export const defaultTheme = {
     secondary50: "#1d246050",
     secondary_light: "#373f84",
 
-    green: "#50be5b",
+    green_dark: "#3a8b42",
   },
 };

@@ -16,7 +16,7 @@ export const Container = styled.main<Props>`
     color === "green" ? theme.colors.Confirm : theme.colors.Error};
 
   :hover {
-    background-color: ${({ theme }) => theme.colors.green};
+    background-color: ${({ theme }) => theme.colors.green_dark};
   }
 `;
 
