@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Container, Title, InputField, Error } from "./styles";
 
 interface Props {
@@ -7,7 +8,6 @@ interface Props {
   register: any;
   error?: string;
   placeholder: string;
-  onBlur?: boolean;
 }
 
 export function Input({
@@ -17,53 +17,48 @@ export function Input({
   register,
   placeholder,
   error,
-}: // onBlur,
-Props) {
-  // const [userNameExists, setUserNameExists] = useState();
-  // const [emailExists, setEmailExists] = useState();
+}: Props) {
+  const [values, setValues] = useState({ cnpj: "" });
 
-  // const handleValidate = (value: string) => {
-  //   if (name === "email") {
-  //     api
-  //       .get("/users/emailExists", { params: { email: value } })
-  //       .then((response) => {
-  //         setEmailExists(response.data);
-  //       });
-  //   } else if (name === "userName") {
-  //     api
-  //       .get("/users/userNameExists", { params: { userName: value } })
-  //       .then((response) => {
-  //         setUserNameExists(response.data);
-  //       });
-  //   }
-  // };
+  const inputChange = (e: any) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const cnpjMask = (value: string) => {
+    return value
+      .replace(/\D+/g, "") // não deixa ser digitado nenhuma letra
+      .replace(/(\d{2})(\d)/, "$1.$2") // captura 2 grupos de número o primeiro com 2 digitos e o segundo de com 3 digitos, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de número
+      .replace(/(\d{3})(\d)/, "$1.$2")
+      .replace(/(\d{3})(\d)/, "$1/$2") // captura 2 grupos de número o primeiro e o segundo com 3 digitos, separados por /
+      .replace(/(\d{4})(\d)/, "$1-$2")
+      .replace(/(-\d{2})\d+?$/, "$1"); // captura os dois últimos 2 números, com um - antes dos dois números
+  };
 
   return (
     <Container>
       <Title>{title}</Title>
-      <InputField
-        type={type}
-        {...register}
-        name={name}
-        placeholder={placeholder}
-        // onBlur={(event) => {
-        //   if (onBlur) {
-        //     handleValidate(event.target.value);
-        //   }
-        // }}
-      ></InputField>
+      {name === "cnpj" ? (
+        <InputField
+          type={type}
+          {...register}
+          name={name}
+          placeholder={placeholder}
+          value={cnpjMask(values.cnpj)}
+          onChange={inputChange}
+        ></InputField>
+      ) : (
+        <InputField
+          type={type}
+          {...register}
+          name={name}
+          placeholder={placeholder}
+        ></InputField>
+      )}
       <Error>{error}</Error>
-      {/* <Error>
-        {name === "userName" && onBlur ? (
-          userNameExists === true && (
-            <>Esse nome de usuário já está em uso. Tente outro.</>
-          )
-        ) : name === "email" && onBlur ? (
-          emailExists === true && <>Esse e-mail já está em uso. Tente outro.</>
-        ) : (
-          <></>
-        )}
-      </Error> */}
     </Container>
   );
 }

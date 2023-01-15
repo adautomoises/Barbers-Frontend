@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -12,6 +12,7 @@ import {
   Container,
   Form,
   Header,
+  TopHeader,
   Body,
   Footer,
   Title,
@@ -19,6 +20,7 @@ import {
   Button,
   Error,
   GoBack,
+  ToggleSwitchContainer,
 } from "./styles";
 
 interface FormProps {
@@ -27,6 +29,9 @@ interface FormProps {
   fullName: string;
   password: string;
   passwordConfirmation: string;
+
+  //business
+  cnpj: string;
 }
 
 const schema = yup.object({
@@ -36,6 +41,10 @@ const schema = yup.object({
     .required("E-mail é obrigatório"),
   userName: yup.string().required("Digite seu Nome de Usuário, Por favor!"),
   fullName: yup.string().required("Digite seu Nome Completo, Por favor!"),
+  cnpj: yup
+    .string()
+    .matches(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/, "CNPJ inválido")
+    .required("CNPJ é obrigatório"),
   password: yup
     .string()
     .required("Senha é obrigatório")
@@ -70,103 +79,201 @@ export function Register() {
   const navigate = useNavigate();
   const [emailUserExists, setEmailUserExists] = useState();
 
+  const [type, setType] = useState(false);
+
   const {
     register,
     handleSubmit,
+    reset,
+    setValue,
     // watch,
     formState: { errors },
   } = useForm<FormProps>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormProps) => {
+  const onSubmitUser = (data: FormProps) => {
     let request = {
       email: data.email,
       fullName: data.fullName,
       password: data.password,
       userName: data.userName,
+      type: "USER",
     };
 
     api
       .post("/users", request)
       .then(() => {
-        let request = {
-          email: data.email,
-          password: data.password,
-        };
-
-        api
-          .post("/login", request)
-          .then((response) => {
-            localStorage.setItem("@barbers:user-id-1.0.0", response.data.id);
-            localStorage.setItem(
-              "@barbers:user-token-1.0.0",
-              response.data.token
-            );
-            navigate("/");
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+        login(data.email, data.password);
       })
       .catch((e) => {
         setEmailUserExists(e.response.data.message);
       });
   };
 
+  const onSubmitBusiness = (data: FormProps) => {
+    let request = {
+      cnpj: data.cnpj,
+      email: data.email,
+      fullName: data.fullName,
+      password: data.password,
+      type: "BUSINESS",
+    };
+
+    api
+      .post("/users", request)
+      .then(() => {
+        login(data.email, data.password);
+      })
+      .catch((e) => {
+        setEmailUserExists(e.response.data.message);
+      });
+  };
+
+  const login = (email: string, password: string) => {
+    let request = {
+      email: email,
+      password: password,
+    };
+    api
+      .post("/login", request)
+      .then((response) => {
+        localStorage.setItem("@barbers:user-id-1.0.0", response.data.id);
+        localStorage.setItem("@barbers:user-token-1.0.0", response.data.token);
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleClick = () => {
+    setIsChecked(!isChecked);
+    setType(!type);
+    reset();
+    setValue("cnpj", "");
+    setValue("userName", "");
+  };
+
   return (
     <Container>
       <Form>
         <Header>
-          <GoBack onClick={() => navigate("/")}>🡠 Voltar ao Início</GoBack>
+          <TopHeader>
+            <GoBack onClick={() => navigate("/")}>🡠 Voltar ao Início</GoBack>
+            <ToggleSwitchContainer>
+              <label>meu negócio</label>
+              <div className="toggle-switch">
+                <input
+                  type="checkbox"
+                  className="toggle-switch-checkbox"
+                  checked={isChecked}
+                />
+                <label className="toggle-switch-label" onClick={handleClick}>
+                  <span className="toggle-switch-inner" />
+                  <span className="toggle-switch-switch" />
+                </label>
+              </div>
+            </ToggleSwitchContainer>
+          </TopHeader>
           <Title>Bem-vindo</Title>
-          <SubTitle>Bem-vindo! Por favor, informe seus dados.</SubTitle>
+          {type === false ? (
+            <SubTitle>Por favor, informe seus dados pessoais.</SubTitle>
+          ) : (
+            <SubTitle>Por favor, informe os dados do seu negócio.</SubTitle>
+          )}
         </Header>
-        <Body onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            title={"Nome Completo"}
-            type="text"
-            name="fullName"
-            placeholder="Nome Completo"
-            register={{ ...register("fullName") }}
-            error={errors.fullName?.message}
-          />
-          <Input
-            title={"Nome de Usuário"}
-            type="text"
-            name="userName"
-            placeholder="Nome de Usuário"
-            register={{ ...register("userName") }}
-            error={errors.userName?.message}
-            // onBlur
-          />
-          <Input
-            title={"E-mail"}
-            type="email"
-            name="email"
-            placeholder="E-mail"
-            register={{ ...register("email") }}
-            error={errors.email?.message}
-            // onBlur
-          />
-          <Input
-            title={"Senha"}
-            type="password"
-            name="password"
-            placeholder="Senha"
-            register={{ ...register("password") }}
-            error={errors.password?.message}
-          />
-          <Input
-            title={"Confirmar Senha"}
-            type="password"
-            register={{ ...register("passwordConfirmation") }}
-            name="passwordConfirmation"
-            placeholder="Confirmar Senha"
-            error={errors.passwordConfirmation?.message}
-          />
-          <ButtonForm type="submit" title="Cadastrar" color="green" />
-        </Body>
+        {type === false ? (
+          <Body onSubmit={handleSubmit(onSubmitUser)}>
+            <Input
+              title={"Nome Completo"}
+              type="text"
+              name="fullName"
+              placeholder="Nome Completo"
+              register={{ ...register("fullName") }}
+              error={errors.fullName?.message}
+            />
+            <Input
+              title={"Nome de Usuário"}
+              type="text"
+              name="userName"
+              placeholder="Nome de Usuário"
+              register={{ ...register("userName") }}
+              error={errors.userName?.message}
+            />
+            <Input
+              title={"E-mail"}
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              register={{ ...register("email") }}
+              error={errors.email?.message}
+            />
+            <Input
+              title={"Senha"}
+              type="password"
+              name="password"
+              placeholder="Senha"
+              register={{ ...register("password") }}
+              error={errors.password?.message}
+            />
+            <Input
+              title={"Confirmar Senha"}
+              type="password"
+              register={{ ...register("passwordConfirmation") }}
+              name="passwordConfirmation"
+              placeholder="Confirmar Senha"
+              error={errors.passwordConfirmation?.message}
+            />
+            <ButtonForm type="submit" title="Cadastrar" color="green" />
+          </Body>
+        ) : (
+          <Body onSubmit={handleSubmit(onSubmitBusiness)}>
+            <Input
+              title={"Nome do Negócio"}
+              type="text"
+              name="fullName"
+              placeholder="Nome do Negócio"
+              register={{ ...register("fullName") }}
+              error={errors.fullName?.message}
+            />
+            <Input
+              title={"CNPJ"}
+              type="text"
+              name="cnpj"
+              placeholder="CNPJ"
+              register={{ ...register("cnpj") }}
+              error={errors.cnpj?.message}
+            />
+            <Input
+              title={"E-mail"}
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              register={{ ...register("email") }}
+              error={errors.email?.message}
+            />
+            <Input
+              title={"Senha"}
+              type="password"
+              name="password"
+              placeholder="Senha"
+              register={{ ...register("password") }}
+              error={errors.password?.message}
+            />
+            <Input
+              title={"Confirmar Senha"}
+              type="password"
+              register={{ ...register("passwordConfirmation") }}
+              name="passwordConfirmation"
+              placeholder="Confirmar Senha"
+              error={errors.passwordConfirmation?.message}
+            />
+            <ButtonForm type="submit" title="Cadastrar" color="green" />
+          </Body>
+        )}
         <Footer>
           {emailUserExists && <Error>{emailUserExists}</Error>}
           <div
