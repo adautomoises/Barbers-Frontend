@@ -53,7 +53,6 @@ export function Carousel({ images }: Props) {
   useEffect(() => {
     const interval = setInterval(() => {
       handleCarouselNext();
-      console.log("a");
     }, 5000);
     return () => clearTimeout(interval);
   }, [imageIndex]);
