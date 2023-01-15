@@ -6,6 +6,7 @@ import * as yup from "yup";
 import api from "../../services/api";
 import { Input } from "../../components/Input";
 import { ButtonForm } from "../../components/ButtonForm";
+import { Divider } from "../../components/Divider";
 
 import { ReactComponent as GoogleIcon } from "../../assets/google.svg";
 import { ReactComponent as FaceIcon } from "../../assets/Facebook.svg";
@@ -29,7 +30,6 @@ import {
   LoginWithApple,
   GoBack,
 } from "./styles";
-import { Divider } from "../../components/Divider";
 
 interface FormProps {
   email: string;
@@ -71,7 +71,6 @@ export function Login() {
       })
       .catch((e) => {
         console.log(e);
-        alert("E-mail ou Senha não confere!");
       });
   };
 
